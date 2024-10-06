@@ -28,4 +28,28 @@ class Tree
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def insert(value)
+    new_node = Node.new(value)
+    current_node = root
+    leaf = nil
+
+    while current_node
+      leaf = current_node
+      current_node = if new_node < current_node
+                       current_node.left
+                     elsif new_node > current_node
+                       current_node.right
+                     else
+                       return # Value already exists, do nothing
+                     end
+    end
+
+    # At this point, `leaf` should be the parent node of `new_node`
+    if new_node < leaf
+      leaf.left = new_node
+    else
+      leaf.right = new_node
+    end
+  end
 end
