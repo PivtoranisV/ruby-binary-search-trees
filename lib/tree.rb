@@ -103,6 +103,18 @@ class Tree
     leaf
   end
 
+  def find(value, leaf = root)
+    return nil if leaf.nil?
+
+    if value < leaf.data
+      find(value, leaf.left)
+    elsif value > leaf.data
+      find(value, leaf.right)
+    else
+      leaf # Return the node if the value matches
+    end
+  end
+
   private
 
   def find_min(leaf)
