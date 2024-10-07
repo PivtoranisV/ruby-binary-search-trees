@@ -115,6 +115,27 @@ class Tree
     end
   end
 
+  def level_order_iterative
+    return [] if root.nil?
+
+    queue = [root]
+    result = []
+
+    until queue.empty?
+      current_node = queue.shift
+      if block_given?
+        yield(current_node)
+      else
+        result << current_node.data
+      end
+
+      queue.push(current_node.left) if current_node.left
+      queue.push(current_node.right) if current_node.right
+    end
+
+    result unless block_given?
+  end
+
   private
 
   def find_min(leaf)

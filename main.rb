@@ -14,3 +14,5 @@ test_tree.delete(6345)
 test_tree.delete(1111)
 test_tree.pretty_print
 p test_tree.find(324)
+
+test_tree.level_order_iterative { |node| puts node.data }
