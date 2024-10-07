@@ -70,4 +70,44 @@ class Tree
 
     leaf
   end
+
+  def delete(value, leaf = root)
+    return leaf if leaf.nil?
+
+    if value < leaf.data
+      leaf.left = delete(value, leaf.left)
+    elsif value > leaf.data
+      leaf.right = delete(value, leaf.right)
+
+    # If the value is equal to the leaf's data, this is the node to be deleted
+    else
+
+      # Case 1: Node with only one child or no child
+      if leaf.left.nil?
+        return leaf.right
+      elsif leaf.right.nil?
+        return leaf.left
+      end
+
+      # Case 2: Node with two children
+      # Find the in-order successor (smallest in the right subtree)
+      min_larger_node = find_min(leaf.right)
+
+      # Replace the current node's value with the in-order successor's value
+      leaf.data = min_larger_node.data
+
+      # Recursively delete the in-order successor
+      leaf.right = delete(min_larger_node.data, leaf.right)
+    end
+
+    leaf
+  end
+
+  private
+
+  def find_min(leaf)
+    current = leaf
+    current = current.left until current.left.nil? # Go as left as possible
+    current
+  end
 end
