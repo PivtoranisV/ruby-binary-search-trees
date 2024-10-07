@@ -29,27 +29,45 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  def insert(value)
+  #  iterative solution
+  # def insert(value)
+  #   new_node = Node.new(value)
+  #   current_node = root
+  #   leaf = nil
+
+  #   while current_node
+  #     leaf = current_node
+  #     current_node = if new_node < current_node
+  #                      current_node.left
+  #                    elsif new_node > current_node
+  #                      current_node.right
+  #                    else
+  #                      return # Value already exists, do nothing
+  #                    end
+  #   end
+
+  #   # At this point, `leaf` should be the parent node of `new_node`
+  #   if new_node < leaf
+  #     leaf.left = new_node
+  #   else
+  #     leaf.right = new_node
+  #   end
+  # end
+
+  # Recursive solution
+  def insert(value, leaf = root)
     new_node = Node.new(value)
-    current_node = root
-    leaf = nil
 
-    while current_node
-      leaf = current_node
-      current_node = if new_node < current_node
-                       current_node.left
-                     elsif new_node > current_node
-                       current_node.right
-                     else
-                       return # Value already exists, do nothing
-                     end
-    end
-
-    # At this point, `leaf` should be the parent node of `new_node`
-    if new_node < leaf
-      leaf.left = new_node
+    if leaf.nil?
+      return new_node
+    elsif new_node == leaf
+      return leaf # Do nothing if the value already exists in the tree
+    elsif new_node < leaf
+      leaf.left = insert(value, leaf.left)
     else
-      leaf.right = new_node
+      leaf.right = insert(value, leaf.right)
     end
+
+    leaf
   end
 end

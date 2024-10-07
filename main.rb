@@ -7,4 +7,5 @@ test_tree.pretty_print
 test_tree.insert(2)
 test_tree.insert(6)
 test_tree.insert(4)
+test_tree.insert(400)
 test_tree.pretty_print
