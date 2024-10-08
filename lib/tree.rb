@@ -136,6 +136,23 @@ class Tree
     result unless block_given?
   end
 
+  def preorder(current_node = root, result = [], &block)
+    # root -> left -> right
+
+    return if current_node.nil?
+
+    if block_given?
+      yield(current_node)
+    else
+      result << current_node.data
+    end
+
+    preorder(current_node.left, result, &block)
+    preorder(current_node.right, result, &block)
+
+    result unless block_given?
+  end
+
   private
 
   def find_min(leaf)
