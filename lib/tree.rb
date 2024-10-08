@@ -194,6 +194,16 @@ class Tree
     [left, right].max + 1
   end
 
+  def depth(node, current_node = root)
+    return 0 if current_node == node
+
+    if node < current_node
+      depth(node, current_node.left) + 1
+    elsif node > current_node
+      depth(node, current_node.right) + 1
+    end
+  end
+
   private
 
   def find_min(leaf)
