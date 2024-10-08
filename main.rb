@@ -17,3 +17,4 @@ p test_tree.find(324)
 
 p test_tree.level_order_iterative
 p test_tree.preorder
+p test_tree.inorder

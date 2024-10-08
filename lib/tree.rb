@@ -153,6 +153,23 @@ class Tree
     result unless block_given?
   end
 
+  def inorder(current_node = root, result = [], &block)
+    # left -> root -> right
+
+    return if current_node.nil?
+
+    inorder(current_node.left, result, &block)
+    if block_given?
+      yield(current_node)
+    else
+      result << current_node.data
+    end
+
+    inorder(current_node.right, result, &block)
+
+    result unless block_given?
+  end
+
   private
 
   def find_min(leaf)
