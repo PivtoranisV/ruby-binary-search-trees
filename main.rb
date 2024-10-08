@@ -2,23 +2,31 @@
 
 require_relative 'lib/tree'
 
-test_tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-test_tree.pretty_print
-test_tree.insert(2)
-test_tree.insert(6)
-test_tree.insert(4)
-test_tree.insert(400)
-test_tree.pretty_print
-test_tree.delete(400)
-test_tree.delete(6345)
-test_tree.delete(1111)
-test_tree.pretty_print
-p test_tree.find(324)
+def driver
+  bst = Tree.new((Array.new(15) { rand(1..100) }))
+  puts 'Tree is Balanced' if bst.balanced?
+  puts 'Level-order Traversal:'
+  p bst.level_order_iterative
+  puts 'Pre-order Traversal:'
+  p bst.preorder
+  puts 'In-order Traversal:'
+  p bst.inorder
+  puts 'Post-order Traversal:'
+  p bst.postorder
+  bst.insert(rand(200..300))
+  bst.insert(rand(200..300))
+  bst.insert(rand(200..300))
+  puts 'Tree is Unbalanced' unless bst.balanced?
+  bst.rebalance
+  puts 'Tree is Balanced again' if bst.balanced?
+  puts 'Level-order Traversal:'
+  p bst.level_order_iterative
+  puts 'Pre-order Traversal:'
+  p bst.preorder
+  puts 'In-order Traversal:'
+  p bst.inorder
+  puts 'Post-order Traversal:'
+  p bst.postorder
+end
 
-p test_tree.level_order_iterative
-p test_tree.preorder
-p test_tree.inorder
-p test_tree.postorder
-p test_tree.height
-node = test_tree.find(324)
-p test_tree.depth(node)
+driver
