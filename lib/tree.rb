@@ -170,6 +170,22 @@ class Tree
     result unless block_given?
   end
 
+  def postorder(current_node = root, result = [], &block)
+    # left -> right -> root
+
+    return if current_node.nil?
+
+    postorder(current_node.left, result, &block)
+    postorder(current_node.right, result, &block)
+    if block_given?
+      yield(current_node)
+    else
+      result << current_node.data
+    end
+
+    result unless block_given?
+  end
+
   private
 
   def find_min(leaf)
