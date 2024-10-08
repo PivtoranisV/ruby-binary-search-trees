@@ -19,3 +19,4 @@ p test_tree.level_order_iterative
 p test_tree.preorder
 p test_tree.inorder
 p test_tree.postorder
+p test_tree.height

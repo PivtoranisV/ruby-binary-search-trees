@@ -186,6 +186,14 @@ class Tree
     result unless block_given?
   end
 
+  def height(node = root)
+    return -1 if node.nil?
+
+    left = height(node.left)
+    right = height(node.right)
+    [left, right].max + 1
+  end
+
   private
 
   def find_min(leaf)
